@@ -16,9 +16,21 @@ const usersGet = async (req, res = response) => {
 };
 
 const usersPost = async (req, res = response) => {
-  res.status(200).json({
-    message: "user post",
+  const { name, nickname, email, password, age, city, social_media_url, role } =
+    req.body;
+  const user = new User({
+    name,
+    nickname,
+    email,
+    password,
+    age,
+    city,
+    social_media_url,
+    role,
   });
+
+  await user.save();
+  res.json(user);
 };
 
 module.exports = {
