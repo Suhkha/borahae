@@ -6,6 +6,7 @@ class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
+    this.usersBasePath = "/api/users";
 
     //database
     this.database();
@@ -23,13 +24,12 @@ class Server {
 
   middlewares() {
     this.app.use(cors());
+    this.app.use(express.json());
     this.app.use(express.static("public"));
   }
 
   routes() {
-    this.app.get("/", (req, res) => {
-      res.send("Hello, this is a basic route");
-    });
+    this.app.use(this.usersBasePath, require("../routes/users"));
   }
 
   listen() {
