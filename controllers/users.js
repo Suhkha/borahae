@@ -53,8 +53,15 @@ const usersPut = async (req, res = response) => {
   res.json(user);
 };
 
+const usersDelete = async (req, res = response) => {
+  const { id } = req.params;
+  const user = await User.findByIdAndUpdate(id, { status: false });
+  res.json(user);
+};
+
 module.exports = {
   usersGet,
   usersPost,
   usersPut,
+  usersDelete,
 };
