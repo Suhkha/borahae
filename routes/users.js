@@ -4,6 +4,7 @@ const { usersGet, usersPost, usersPut } = require("../controllers/users");
 
 const {
   isValidEmail,
+  isValidNickname,
   isValidRole,
   isUserValidById,
 } = require("../database/db-validators");
@@ -21,7 +22,10 @@ router.post(
       .not()
       .isEmpty()
       .isLength({ min: 6 }),
-    check("nickname", "nickname is required").not().isEmpty(),
+    check("nickname", "nickname is required")
+      .not()
+      .isEmpty()
+      .custom(isValidNickname),
     check("email", "not valid").isEmail().custom(isValidEmail),
     check("age", "age is required").not().isEmpty(),
     check("city", "city is required").not().isEmpty(),
