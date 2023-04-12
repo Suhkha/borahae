@@ -1,4 +1,6 @@
 const { response } = require("express");
+const bcryptjs = require("bcryptjs");
+
 const User = require("../models/user");
 
 const usersGet = async (req, res = response) => {
@@ -28,6 +30,10 @@ const usersPost = async (req, res = response) => {
     social_media_url,
     role,
   });
+
+  //encrypt password
+  const salt = bcryptjs.genSaltSync();
+  user.password = bcryptjs.hashSync(password, salt);
 
   await user.save();
   res.json(user);
