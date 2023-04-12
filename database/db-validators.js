@@ -9,6 +9,14 @@ const isValidEmail = async (email = "") => {
   }
 };
 
+const isValidNickname = async (nickname = "") => {
+  const checkNickname = await User.findOne({ nickname });
+
+  if (checkNickname) {
+    throw new Error(`${nickname} is in our database already`);
+  }
+};
+
 const isValidRole = async (role = "") => {
   const checkRole = await Role.findOne({ role });
   if (!checkRole) {
@@ -16,7 +24,17 @@ const isValidRole = async (role = "") => {
   }
 };
 
+const isUserValidById = async (id) => {
+  const checkUserId = await User.findById(id);
+
+  if (!checkUserId) {
+    throw new Error("User ID does not exists");
+  }
+};
+
 module.exports = {
   isValidEmail,
+  isValidNickname,
   isValidRole,
+  isUserValidById,
 };

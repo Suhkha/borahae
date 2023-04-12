@@ -1,9 +1,19 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
-const { usersGet, usersPost } = require("../controllers/users");
+const {
+  usersGet,
+  usersPost,
+  usersPut,
+  usersDelete,
+} = require("../controllers/users");
 
-const { isValidEmail, isValidRole } = require("../database/db-validators");
-const { validateFields } = require("../middlewares/validate-fields");
+const {
+  isValidEmail,
+  isValidNickname,
+  isValidRole,
+  isUserValidById,
+} = require("../database/db-validators");
+const { validateFields } = require("../middlewares");
 
 const router = Router();
 
@@ -17,7 +27,10 @@ router.post(
       .not()
       .isEmpty()
       .isLength({ min: 6 }),
-    check("nickname", "nickname is required").not().isEmpty(),
+    check("nickname", "nickname is required")
+      .not()
+      .isEmpty()
+      .custom(isValidNickname),
     check("email", "not valid").isEmail().custom(isValidEmail),
     check("age", "age is required").not().isEmpty(),
     check("city", "city is required").not().isEmpty(),
@@ -26,6 +39,27 @@ router.post(
     validateFields,
   ],
   usersPost
+);
+
+router.put(
+  "/:id",
+  [
+    check("id", "invalid Mongo ID").isMongoId(),
+    check("id").custom(isUserValidById),
+    check("role").custom(isValidRole),
+    validateFields,
+  ],
+  usersPut
+);
+
+router.delete(
+  "/:id",
+  [
+    check("id", "Invalid Mongo ID").isMongoId(),
+    check("id").custom(isUserValidById),
+    validateFields,
+  ],
+  usersDelete
 );
 
 module.exports = router;
