@@ -39,7 +39,22 @@ const usersPost = async (req, res = response) => {
   res.json(user);
 };
 
+const usersPut = async (req, res = response) => {
+  const { id } = req.params;
+  const { _id, email, password, ...userData } = req.body;
+
+  if (password) {
+    //encrypt password
+    const salt = bcryptjs.genSaltSync();
+    userData.password = bcryptjs.hashSync(password, salt);
+  }
+
+  const user = await User.findByIdAndUpdate(id, userData);
+  res.json(user);
+};
+
 module.exports = {
   usersGet,
   usersPost,
+  usersPut,
 };

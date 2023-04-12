@@ -16,7 +16,16 @@ const isValidRole = async (role = "") => {
   }
 };
 
+const isUserValidById = async (id) => {
+  const checkUserId = await User.findById(id);
+
+  if (!checkUserId) {
+    throw new Error("User ID does not exists");
+  }
+};
+
 module.exports = {
   isValidEmail,
   isValidRole,
+  isUserValidById,
 };
