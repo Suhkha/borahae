@@ -8,6 +8,8 @@ class Server {
     this.port = process.env.PORT;
     this.usersBasePath = "/api/users";
     this.authBasePath = "/api/auth";
+    this.spotifyAuthBasePath = "/api/spotify/auth";
+    this.spotifyBasePath = "/api/spotify";
 
     //database
     this.database();
@@ -32,6 +34,8 @@ class Server {
   routes() {
     this.app.use(this.authBasePath, require("../routes/auth"));
     this.app.use(this.usersBasePath, require("../routes/users"));
+    this.app.use(this.spotifyAuthBasePath, require("../routes/spotify-auth"));
+    this.app.use(this.spotifyBasePath, require("../routes/spotify"));
   }
 
   listen() {
