@@ -32,7 +32,9 @@ const spotifyCallback = async (req, res = response) => {
     spotifyApi.setRefreshToken(refresh_token);
     localStorage.setItem("access_token", access_token);
 
-    res.redirect("http://localhost:3000/api/spotify/artist/albums");
+    res.status(200).json({
+      message: "auth successful",
+    });
   } catch (err) {
     res.redirect("/#/error/invalid token");
   }
