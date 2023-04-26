@@ -11,10 +11,18 @@ const PlaylistSchema = Schema({
   spotify_playlist_id: {
     type: String,
   },
+  spotify_tracks_id: {
+    type: [String],
+    default: [],
+  },
   user_id: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
+  },
+  status: {
+    type: Boolean,
+    default: false,
   },
 });
 
