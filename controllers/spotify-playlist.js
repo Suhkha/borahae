@@ -15,9 +15,12 @@ const createPlaylist = async (req, res = response) => {
       public: true,
     });
 
+    const spotify_playlist_id = createPlaylist.body.id;
+
     const playlist = new Playlist({
       name,
       description,
+      spotify_playlist_id,
       user_id,
     });
     await playlist.save();

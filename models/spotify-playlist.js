@@ -8,6 +8,9 @@ const PlaylistSchema = Schema({
   description: {
     type: String,
   },
+  spotify_playlist_id: {
+    type: String,
+  },
   user_id: {
     type: Schema.Types.ObjectId,
     ref: "User",
