@@ -1,9 +1,8 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 const { validateFields } = require("../middlewares");
-
 const { createPlaylist } = require("../controllers/spotify-playlist");
-
+const { addTracksToPlaylist } = require("../controllers/spotify-tracks");
 const router = Router();
 
 router.post(
@@ -14,6 +13,12 @@ router.post(
     validateFields,
   ],
   createPlaylist
+);
+
+router.put(
+  "/add-tracks-to-playlist/:id",
+  [check("id", "invalid Mongo ID").isMongoId(), validateFields],
+  addTracksToPlaylist
 );
 
 module.exports = router;
