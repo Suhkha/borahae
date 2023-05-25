@@ -2,8 +2,7 @@ const { response } = require("express");
 const {
   getSpotifyAccessToken,
 } = require("../helpers/get-spotify-access-token");
-
-const Playlist = require("../models/spotify-playlist");
+const { Playlist } = require("../models");
 
 const createPlaylist = async (req, res = response) => {
   const { name, description, userId } = req.body;

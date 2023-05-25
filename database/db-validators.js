@@ -1,5 +1,4 @@
-const User = require("../models/user");
-const Role = require("../models/role");
+const { User, Role } = require("../models");
 
 const isValidEmail = async (email = "") => {
   const checkEmail = await User.findOne({ email });
