@@ -3,10 +3,10 @@ const { LocalStorage } = require("node-localstorage");
 
 const getSpotifyAccessToken = () => {
   const localStorage = new LocalStorage("./local-storage");
-  const access_token = localStorage.getItem("access_token");
+  const accessToken = localStorage.getItem("accessToken");
 
   const spotifyApi = new SpotifyWebApi({
-    accessToken: access_token,
+    accessToken: accessToken,
   });
 
   return spotifyApi;

@@ -9,7 +9,7 @@ router.post(
   "/create-playlist",
   [
     check("name", "please add a playlist name").not().isEmpty(),
-    check("user_id", "please add valid user id").isMongoId(),
+    check("userId", "please add valid user id").isMongoId(),
     validateFields,
   ],
   createPlaylist

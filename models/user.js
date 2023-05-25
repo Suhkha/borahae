@@ -23,7 +23,7 @@ const UserSchema = Schema({
   city: {
     type: String,
   },
-  social_media_url: {
+  socialMediaUrl: {
     type: String,
   },
   role: {

@@ -34,7 +34,7 @@ router.post(
     check("email", "not valid").isEmail().custom(isValidEmail),
     check("age", "age is required").not().isEmpty(),
     check("city", "city is required").not().isEmpty(),
-    check("social_media_url", "social media url is required").not().isEmpty(),
+    check("socialMediaUrl", "social media url is required").not().isEmpty(),
     check("role").custom(isValidRole),
     validateFields,
   ],

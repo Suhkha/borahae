@@ -30,7 +30,7 @@ const spotifyCallback = async (req, res = response) => {
 
     spotifyApi.setAccessToken(access_token);
     spotifyApi.setRefreshToken(refresh_token);
-    localStorage.setItem("access_token", access_token);
+    localStorage.setItem("accessToken", access_token);
 
     res.status(200).json({
       message: "auth successful",

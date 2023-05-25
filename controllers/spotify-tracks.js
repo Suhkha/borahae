@@ -7,16 +7,16 @@ const Playlist = require("../models/spotify-playlist");
 
 const addTracksToPlaylist = async (req, res = response) => {
   const { id } = req.params;
-  const { _id, name, description, user_id, ...spotifyData } = req.body;
+  const { _id, name, description, userId, ...spotifyData } = req.body;
 
   const spotifyApi = getSpotifyAccessToken();
 
-  const { spotify_playlist_id } = await Playlist.findById(id);
+  const { spotifyPlaylistId } = await Playlist.findById(id);
 
   try {
     const addTracksToPlaylist = await spotifyApi.addTracksToPlaylist(
-      spotify_playlist_id,
-      spotifyData.spotify_tracks_id
+      spotifyPlaylistId,
+      spotifyData.spotifyTracksId
     );
 
     await Playlist.findByIdAndUpdate(id, spotifyData);

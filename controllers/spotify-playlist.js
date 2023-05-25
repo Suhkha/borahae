@@ -6,7 +6,7 @@ const {
 const Playlist = require("../models/spotify-playlist");
 
 const createPlaylist = async (req, res = response) => {
-  const { name, description, user_id } = req.body;
+  const { name, description, userId } = req.body;
   const spotifyApi = getSpotifyAccessToken();
 
   try {
@@ -15,13 +15,13 @@ const createPlaylist = async (req, res = response) => {
       public: true,
     });
 
-    const spotify_playlist_id = createPlaylist.body.id;
+    const spotifyPlaylistId = createPlaylist.body.id;
 
     const playlist = new Playlist({
       name,
       description,
-      spotify_playlist_id,
-      user_id,
+      spotifyPlaylistId,
+      userId,
     });
     await playlist.save();
 

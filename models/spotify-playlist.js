@@ -8,14 +8,14 @@ const PlaylistSchema = Schema({
   description: {
     type: String,
   },
-  spotify_playlist_id: {
+  spotifyPlaylistId: {
     type: String,
   },
-  spotify_tracks_id: {
+  spotifyTracksId: {
     type: [String],
     default: [],
   },
-  user_id: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
