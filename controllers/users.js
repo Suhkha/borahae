@@ -18,7 +18,7 @@ const usersGet = async (req, res = response) => {
 };
 
 const usersPost = async (req, res = response) => {
-  const { name, nickname, email, password, age, city, social_media_url, role } =
+  const { name, nickname, email, password, age, city, socialMediaUrl, role } =
     req.body;
   const user = new User({
     name,
@@ -27,7 +27,7 @@ const usersPost = async (req, res = response) => {
     password,
     age,
     city,
-    social_media_url,
+    socialMediaUrl,
     role,
   });
 
