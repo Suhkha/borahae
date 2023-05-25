@@ -6,10 +6,13 @@ class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
-    this.usersBasePath = "/api/users";
-    this.authBasePath = "/api/auth";
-    this.spotifyAuthBasePath = "/api/spotify/auth";
-    this.spotifyBasePath = "/api/spotify";
+
+    this.paths = {
+      auth: "/api/auth",
+      spotify: "/api/spotify",
+      spotifyAuth: "/api/spotify/auth",
+      users: "/api/users",
+    };
 
     //database
     this.database();
@@ -32,10 +35,10 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.authBasePath, require("../routes/auth"));
-    this.app.use(this.usersBasePath, require("../routes/users"));
-    this.app.use(this.spotifyAuthBasePath, require("../routes/spotify-auth"));
-    this.app.use(this.spotifyBasePath, require("../routes/spotify"));
+    this.app.use(this.paths.auth, require("../routes/auth"));
+    this.app.use(this.paths.spotify, require("../routes/spotify"));
+    this.app.use(this.paths.spotifyAuth, require("../routes/spotify-auth"));
+    this.app.use(this.paths.users, require("../routes/users"));
   }
 
   listen() {

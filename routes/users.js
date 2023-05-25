@@ -6,7 +6,6 @@ const {
   usersPut,
   usersDelete,
 } = require("../controllers/users");
-
 const {
   isValidEmail,
   isValidNickname,
