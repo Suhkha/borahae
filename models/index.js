@@ -1,11 +1,11 @@
 const Role = require("./role");
 const Server = require("./server");
-const Spotify = require("./spotify");
+const Playlist = require("./spotify-playlist");
 const User = require("./user");
 
 module.exports = {
   Role,
   Server,
-  Spotify,
+  Playlist,
   User,
 };
