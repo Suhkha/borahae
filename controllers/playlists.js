@@ -4,7 +4,7 @@ const { Playlist } = require("../models");
 /**
  * This allow to create the playlist in database only
  */
-const createPlaylistDatabase = async (req, res = response) => {
+const createPlaylist = async (req, res = response) => {
   const { name, description, userId } = req.body;
 
   try {
@@ -22,5 +22,5 @@ const createPlaylistDatabase = async (req, res = response) => {
 };
 
 module.exports = {
-  createPlaylistDatabase,
+  createPlaylist,
 };

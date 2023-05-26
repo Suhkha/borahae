@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 const { validateFields } = require("../middlewares");
-const { createPlaylistDatabase } = require("../controllers/playlists");
+const { createPlaylist } = require("../controllers/playlists");
 // const { addTracksToPlaylist } = require("../controllers/tracks");
 const router = Router();
 
@@ -12,7 +12,7 @@ router.post(
     check("userId", "please add valid user id").isMongoId(),
     validateFields,
   ],
-  createPlaylistDatabase
+  createPlaylist
 );
 
 // router.put(
