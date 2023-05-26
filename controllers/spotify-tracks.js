@@ -4,21 +4,20 @@ const {
 } = require("../helpers/get-spotify-access-token");
 const { Playlist } = require("../models");
 
-const addTracksToPlaylist = async (req, res = response) => {
+const addTracksToSpotifyPlaylist = async (req, res = response) => {
   const { id } = req.params;
-  const { _id, name, description, userId, ...spotifyData } = req.body;
 
   const spotifyApi = getSpotifyAccessToken();
 
-  const { spotifyPlaylistId } = await Playlist.findById(id);
+  const { spotifyPlaylistId, spotifyTracksId } = await Playlist.findById(id);
 
   try {
     const addTracksToPlaylist = await spotifyApi.addTracksToPlaylist(
       spotifyPlaylistId,
-      spotifyData.spotifyTracksId
+      spotifyTracksId
     );
 
-    await Playlist.findByIdAndUpdate(id, spotifyData);
+    await Playlist.findByIdAndUpdate(id, { spotifyTracksId });
     res.json(addTracksToPlaylist);
   } catch (err) {
     console.log(err);
@@ -26,5 +25,5 @@ const addTracksToPlaylist = async (req, res = response) => {
 };
 
 module.exports = {
-  addTracksToPlaylist,
+  addTracksToSpotifyPlaylist,
 };

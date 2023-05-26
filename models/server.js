@@ -9,7 +9,10 @@ class Server {
 
     this.paths = {
       auth: "/api/auth",
-      spotify: "/api/spotify",
+      playlist: "/api/playlist",
+      tracks: "/api/tracks",
+      spotifyPlaylists: "/api/spotify-playlists",
+      spotifyTracks: "/api/spotify-tracks",
       spotifyAuth: "/api/spotify/auth",
       users: "/api/users",
     };
@@ -36,7 +39,13 @@ class Server {
 
   routes() {
     this.app.use(this.paths.auth, require("../routes/auth"));
-    this.app.use(this.paths.spotify, require("../routes/spotify"));
+    this.app.use(this.paths.playlist, require("../routes/playlists"));
+    this.app.use(this.paths.tracks, require("../routes/tracks"));
+    this.app.use(
+      this.paths.spotifyPlaylists,
+      require("../routes/spotify-playlist")
+    );
+    this.app.use(this.paths.spotifyTracks, require("../routes/spotify-tracks"));
     this.app.use(this.paths.spotifyAuth, require("../routes/spotify-auth"));
     this.app.use(this.paths.users, require("../routes/users"));
   }

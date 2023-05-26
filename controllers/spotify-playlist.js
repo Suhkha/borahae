@@ -4,9 +4,14 @@ const {
 } = require("../helpers/get-spotify-access-token");
 const { Playlist } = require("../models");
 
-const createPlaylist = async (req, res = response) => {
-  const { name, description, userId } = req.body;
+/**
+ * This allow to create the playlist in spotify only
+ */
+const createSpotifyPlaylist = async (req, res = response) => {
+  const { id } = req.params;
   const spotifyApi = getSpotifyAccessToken();
+
+  const { name, description } = await Playlist.findById(id);
 
   try {
     const createPlaylist = await spotifyApi.createPlaylist(name, {
@@ -15,14 +20,7 @@ const createPlaylist = async (req, res = response) => {
     });
 
     const spotifyPlaylistId = createPlaylist.body.id;
-
-    const playlist = new Playlist({
-      name,
-      description,
-      spotifyPlaylistId,
-      userId,
-    });
-    await playlist.save();
+    await Playlist.findByIdAndUpdate(id, { spotifyPlaylistId });
 
     res.json(createPlaylist);
   } catch (err) {
@@ -31,5 +29,5 @@ const createPlaylist = async (req, res = response) => {
 };
 
 module.exports = {
-  createPlaylist,
+  createSpotifyPlaylist,
 };
