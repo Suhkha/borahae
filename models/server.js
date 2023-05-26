@@ -10,7 +10,7 @@ class Server {
     this.paths = {
       auth: "/api/auth",
       playlist: "/api/playlist",
-      //tracks: "/api/tracks",
+      tracks: "/api/tracks",
       spotifyPlaylists: "/api/spotify-playlists",
       spotifyTracks: "/api/spotify-tracks",
       spotifyAuth: "/api/spotify/auth",
@@ -40,7 +40,7 @@ class Server {
   routes() {
     this.app.use(this.paths.auth, require("../routes/auth"));
     this.app.use(this.paths.playlist, require("../routes/playlists"));
-    //this.app.use(this.paths.tracks, require("../routes/tracks"));
+    this.app.use(this.paths.tracks, require("../routes/tracks"));
     this.app.use(
       this.paths.spotifyPlaylists,
       require("../routes/spotify-playlist")
