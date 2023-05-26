@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
-const { validateFields } = require("../middlewares");
+const { validateFields, validateJWT } = require("../middlewares");
 const { createPlaylist } = require("../controllers/playlists");
 // const { addTracksToPlaylist } = require("../controllers/tracks");
 const router = Router();
@@ -8,17 +8,12 @@ const router = Router();
 router.post(
   "/",
   [
+    validateJWT,
     check("name", "please add a playlist name").not().isEmpty(),
     check("userId", "please add valid user id").isMongoId(),
     validateFields,
   ],
   createPlaylist
 );
-
-// router.put(
-//   "/add-tracks-to-playlist/:id",
-//   [check("id", "invalid Mongo ID").isMongoId(), validateFields],
-//   addTracksToPlaylist
-// );
 
 module.exports = router;
