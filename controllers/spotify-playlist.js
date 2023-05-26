@@ -20,7 +20,7 @@ const createSpotifyPlaylist = async (req, res = response) => {
     });
 
     const spotifyPlaylistId = createPlaylist.body.id;
-    await Playlist.findByIdAndUpdate(id, spotifyPlaylistId);
+    await Playlist.findByIdAndUpdate(id, { spotifyPlaylistId });
 
     res.json(createPlaylist);
   } catch (err) {
