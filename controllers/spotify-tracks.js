@@ -4,7 +4,7 @@ const {
 } = require("../helpers/get-spotify-access-token");
 const { Playlist } = require("../models");
 
-const addTracksToPlaylist = async (req, res = response) => {
+const addTracksToSpotifyPlaylist = async (req, res = response) => {
   const { id } = req.params;
   const { _id, name, description, userId, ...spotifyData } = req.body;
 
@@ -26,5 +26,5 @@ const addTracksToPlaylist = async (req, res = response) => {
 };
 
 module.exports = {
-  addTracksToPlaylist,
+  addTracksToSpotifyPlaylist,
 };
